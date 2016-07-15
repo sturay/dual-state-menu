@@ -1,0 +1,58 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
+}
+body {
+  background: rgba(0,0,130,.3);
+  position: relative;
+  right: 0;
+  width: calc(100vw - 32pt);
+}
+nav {
+  background: rgba(0,0,130,1);
+  display: block;
+  padding: 6pt;
+  position: fixed;
+  width: 32pt;
+}
+nav .menu-label {
+  position: relative;
+}
+nav .menu-label * {
+  background: rgba(0,0,130,1);
+  fill: rgba(255,255,255,0.6);
+  transition: all .2s ease;
+  color: rgba(255,255,255,.6);
+}
+nav .menu-label:hover {
+  transition: all .1s ease;
+  position: relative;
+  fill: rgba(255,255,255,1);
+}
+nav .menu-label svg {
+  width: 20pt;
+  height: 20pt;
+}
+nav .menu-label svg:hover {
+}
+nav .menu-label b {
+  display: block;
+  left: 26pt;
+  padding: 8pt;
+  position: absolute;
+  top: -12pt;
+  width: 210px;
+}
+
+nav .menu-label b:hover {
+  color: rgba(255,255,255,1);
+  transition: all .2s ease;
+}
+nav > ul {}
+nav > ul > li {}
+nav > ul > li:hover {}
+nav > ul > li > ul {}
+nav > ul > li > ul > li {}
+nav > ul > li > ul > li:hover {}

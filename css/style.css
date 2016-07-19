@@ -2,57 +2,119 @@
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
+  font-family: 'Roboto', sans-serif;
 }
 body {
-  background: rgba(0,0,130,.3);
+  background: rgba(0,0,65,.2);
   position: relative;
   right: 0;
-  width: calc(100vw - 32pt);
+  width: calc(100vw - 36px);
 }
-nav {
-  background: rgba(0,0,130,1);
+#navigation {
+  background: rgba(0,0,65,1);
   display: block;
-  padding: 6pt;
+  height: calc(100vh - 40px);
   position: fixed;
-  width: 32pt;
+  overflow: hidden;
+  white-space: nowrap;
 }
-nav .menu-label {
+.menu-control {
+  fill: rgba(0,0,65,1);
+  box-sizing: content-box;
+  position:relative;
+  cursor: pointer;
+}
+.menu-control svg {
+  box-sizing: content-box;
+  height: 24px;
+  padding: 5px 6px 6px;
+  position:relative;
+  width: 24px;
+}
+.menu-control #toggleState .st2 {
+  opacity: .2;
+  transition: all .2s ease;
+}
+.menu-control.expanded #toggleState .st2 {
+  opacity: 1;
+  transition: all .2s ease;
+}
+
+/* EXPANDED */
+#navigation.expanded {
+  transition: all .2s ease;
+  width: 360px;
+}
+#navigation .menu-label {
+  border-top: 1px solid rgba(255,255,255,.5);
+  display: block;
+  height:40px;
   position: relative;
+  transition: all .2s ease;
 }
-nav .menu-label * {
-  background: rgba(0,0,130,1);
+#navigation .menu-label:first-of-type {
+  border-top: 1px solid rgba(255,255,255,0);
+}
+#navigation .menu-label * {
+  background: rgba(0,0,65,1);
   fill: rgba(255,255,255,0.6);
   transition: all .2s ease;
   color: rgba(255,255,255,.6);
 }
-nav .menu-label:hover {
+#navigation .menu-label:hover * {
+  background: rgba(0,0,125,1);
+  color: rgba(255,255,255,1);
   transition: all .1s ease;
-  position: relative;
   fill: rgba(255,255,255,1);
 }
-nav .menu-label svg {
-  width: 20pt;
-  height: 20pt;
+#navigation .menu-label svg {
+  box-sizing: content-box;
+  height: 24px;
+  padding: 7px 6px 8px;
+  position:relative;
+  width: 24px;
 }
-nav .menu-label svg:hover {
-}
-nav .menu-label b {
+#navigation .menu-label b {
   display: block;
   left: 26pt;
-  padding: 8pt;
+  padding: 10px 8pt;
   position: absolute;
-  top: -12pt;
-  width: 210px;
+  top: 0px;
+  width: 325px;
 }
-
-nav .menu-label b:hover {
-  color: rgba(255,255,255,1);
+#navigation ul {
+  list-style: none;
+  display: block;
+  opacity: 0;
+}
+#navigation li {
+  color: rgba(255,255,255,.8);
+  font-weight: 300;
+  margin: 1pt 0;
   transition: all .2s ease;
 }
-nav > ul {}
-nav > ul > li {}
-nav > ul > li:hover {}
-nav > ul > li > ul {}
-nav > ul > li > ul > li {}
-nav > ul > li > ul > li:hover {}
+#navigation li a {
+  color: rgba(255,255,255,.8);
+  display: block;
+  padding: 2pt;
+  text-decoration: none;
+}
+#navigation > ul {
+  margin-left: 32pt;
+  width: calc(100% - 32pt);
+}
+
+/* COLLAPSED */
+#navigation.collapsed {
+  transition: all .2s ease;
+  width: 36px;
+}
+#navigation.collapsed .menu-label {
+  border-top: 1px solid rgba(255,255,255,0);
+  transition: all .2s ease;
+}
+
+#navigation.collapsed > ul,
+#navigation.collapsed > ul > li {
+  transition: all .2s ease;
+}

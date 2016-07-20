@@ -18,15 +18,24 @@ toZero()
 
 var toggleNav = function () {
   
+  var sections = document.querySelectorAll('span.menu-label.list')
+  for(var i=0; i < sections.length; i++){
+    sections[i].classList.remove('active')
+  }
   // 'this' is the target element that the click event was bound to.
 
   // get the height of all of the inner UL elements within the parent element
   for(var i = 0; mainSubMenus.length > i; i++){
     if(this.classList.contains("expanded")) {
       toZero()
-      // mainSubMenus[i].setAttribute("style", "height:"+ values[i].clientHeight +"px;")
     }
     else if(this.classList.contains("collapsed")) {
+
+      // make sure all uf the child lists are collapsed
+      for(var i = 0; initialHeights.length > i; i++){
+        initialHeights[i].classList.remove('expanded')
+        initialHeights[i].classList.add('collapsed')
+      }
       toZero()
     }
   }
@@ -49,18 +58,46 @@ nav.addEventListener('click', toggleNav, false);
 
 // Accordion action bound to the main section element name 'menu-label.list'
 var control = document.getElementById('navigation')
-if(control.classList.contains('expanded')) {
-  var accordion = function(num, loc) {
-    console.log('click', this.nextElementSibling)
+
+
+var accordion = function(name, event) {
+  var clickedSections = document.querySelectorAll('span.menu-label.list')
+  for(var i=0; i < clickedSections.length; i++){
+    clickedSections[i].classList.remove('active')
   }
-  var accArray = document.querySelectorAll('nav span.menu-label.list')
-  for (var i = 0; i < accArray.length; i++) {
-    (function () {
-      var part = this.nextElementSibling
-      accordion(i, part)
-     // part.setAttribute("style", "height:"+ values[i].clientHeight +"px;")
-    }).call(accArray[i]);
-    accArray[i].addEventListener('click', accordion, false);
+  var thisSection = event.path[1].classList.add('active')
+
+  if(document.getElementById('navigation').classList.contains('expanded')){ // key element for differentiating between states
+    var menuToUse = document.getElementById(name), indexOfMenu
+    var allMenusReset = document.querySelectorAll('ul.level-1')
+    if (menuToUse.classList.contains('collapsed')){
+      for(var i=0; i < allMenusReset.length; i++){
+        allMenusReset[i].style.height = '0px'
+        allMenusReset[i].classList.remove('expanded')
+        allMenusReset[i].classList.add('collapsed')
+        allMenusReset[i].setAttribute('dataIndex', i)
+      }
+      if(menuToUse.getAttribute('style') !== "height:0px;"){
+        indexOfMenu = menuToUse.getAttribute('dataIndex')
+        if (menuToUse.classList.contains('collapsed')){
+          menuToUse.setAttribute("style", "height: calc("+ values[indexOfMenu] +"px + 15px);")
+          menuToUse.classList.remove('collapsed')
+          menuToUse.classList.add('expanded')
+        }
+      }
+      else {
+        indexOfMenu = menuToUse.getAttribute('dataIndex')
+        menuToUse.setAttribute("style", "height: calc("+ values[indexOfMenu] +"px + 15px);")
+        menuToUse.classList.remove('collapsed')
+        menuToUse.classList.add('expanded')
+      }
+    }
+    else {
+      menuToUse.setAttribute("style", "height:0px;")
+      menuToUse.classList.remove('expanded')
+      menuToUse.classList.add('collapsed')
+    }
   }
 }
+  
 

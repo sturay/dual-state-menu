@@ -80,6 +80,9 @@ body {
   position:relative;
   width: 24px;
 }
+#navigation .menu-label svg g {
+  pointer-events: none;
+}
 #navigation .menu-label b {
   display: block;
   left: 26pt;

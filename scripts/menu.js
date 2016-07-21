@@ -67,6 +67,7 @@ var accordion = function(name, event) {
   }
   var thisSection = event.path[1].classList.add('active')
 
+  // Main accordion functionality - only available when expanded
   if(document.getElementById('navigation').classList.contains('expanded')){ // key element for differentiating between states
     var menuToUse = document.getElementById(name), indexOfMenu
     var allMenusReset = document.querySelectorAll('ul.level-1')
@@ -97,6 +98,32 @@ var accordion = function(name, event) {
       menuToUse.classList.remove('expanded')
       menuToUse.classList.add('collapsed')
     }
+  }
+  // fly-out menus for when the menu is collapsed
+  else {
+    var clickedElement = event.path[1]
+    var nextElement = document.getElementById(name).cloneNode(true)
+    nextElement.id = '_'+name // alter the id to avoid clashes
+    console.log('clickedElement', clickedElement)
+    console.log('nextElement', nextElement)
+    var temp = document.getElementById('flyout')
+    temp.innerHTML = ''
+    temp.appendChild(nextElement)
+
+    // // get the element and its next sibling wnen clicked.
+    // var flyoutWrapper = document.createElement("aside")
+    // flyoutWrapper.id = "flyout"
+    // for (var member in clickedElement){
+    //   if (clickedElement.hasOwnProperty(member)){
+    //     console.log(clickedElement[member]);
+    //   }
+    // }
+    // var flyoutWrapperContent = clickedElement + nextElement
+    // console.log(flyoutWrapperContent)
+    // flyoutWrapper.innerHTML = flyoutWrapperContent
+    // var sp2 = document.getElementById("flyout")
+    // var parentDiv = sp2.parentNode;
+    // parentDiv.replaceChild(flyoutWrapper, sp2)
   }
 }
   

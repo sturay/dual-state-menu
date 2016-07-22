@@ -30,7 +30,12 @@ var toggleNav = function () {
       toZero()
     }
     else if(this.classList.contains("collapsed")) {
-
+      var temp = document.getElementById('flyout')
+      if(temp.classList.contains('active')){
+        temp.classList.remove('active')
+        clearTimeout(enterCountdown)
+        clearTimeout(countdown)
+      }
       // make sure all uf the child lists are collapsed
       for(var i = 0; initialHeights.length > i; i++){
         initialHeights[i].classList.remove('expanded')
@@ -61,6 +66,7 @@ var control = document.getElementById('navigation')
 
 
 var accordion = function(name, event) {
+  
   var clickedSections = document.querySelectorAll('span.menu-label.list')
   for(var i=0; i < clickedSections.length; i++){
     clickedSections[i].classList.remove('active')
@@ -101,30 +107,55 @@ var accordion = function(name, event) {
   }
   // fly-out menus for when the menu is collapsed
   else {
-    var clickedElement = event.path[1]
+    var temp = document.getElementById('flyout')
+    var clickedElement = event.path[1].children[1].cloneNode(true)
     var nextElement = document.getElementById(name).cloneNode(true)
     nextElement.id = '_'+name // alter the id to avoid clashes
     console.log('clickedElement', clickedElement)
     console.log('nextElement', nextElement)
-    var temp = document.getElementById('flyout')
+    temp.classList.add('active')
     temp.innerHTML = ''
+    temp.appendChild(clickedElement)
     temp.appendChild(nextElement)
-
-    // // get the element and its next sibling wnen clicked.
-    // var flyoutWrapper = document.createElement("aside")
-    // flyoutWrapper.id = "flyout"
-    // for (var member in clickedElement){
-    //   if (clickedElement.hasOwnProperty(member)){
-    //     console.log(clickedElement[member]);
-    //   }
-    // }
-    // var flyoutWrapperContent = clickedElement + nextElement
-    // console.log(flyoutWrapperContent)
-    // flyoutWrapper.innerHTML = flyoutWrapperContent
-    // var sp2 = document.getElementById("flyout")
-    // var parentDiv = sp2.parentNode;
-    // parentDiv.replaceChild(flyoutWrapper, sp2)
   }
 }
   
+var enterCountdown = function(){
+  // console.log('enterCountdown entered')
+  setTimeout(function() {
+    document.getElementById('flyout').classList.remove('active')
+    return true
+  }, 3000);
+}
+var countdown = function(){
+  console.log('countdown entered')
+  setTimeout(function() {
+    document.getElementById('flyout').classList.remove('active')
+    return true
+  }, 500);
+}
+
+function hideflyout(event){
+  var x = event.clientX;
+  var y = event.clientY;
+  var temp = document.getElementById('flyout')
+  console.log('x : temp.clientWidth', x, ' : ' , temp.clientWidth)
+  if(x > 36) {
+    if(enterCountdown()) {
+      temp.innerHTML = ''
+      clearTimeout(enterCountdown)
+    }
+  }
+  if(x > temp.clientWidth) {
+    if(countdown()) {
+      temp.innerHTML = ''
+      clearTimeout(countdown)
+    }
+  }
+  else{
+    console.log('false')
+  }
+  
+
+}
 

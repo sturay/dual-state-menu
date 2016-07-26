@@ -90,7 +90,7 @@ var menu_tooltip = function(event, str) {
       useThis.innerHTML = ''
       useThis.style.top = elemTop + 6 + 'px'
       useThis.innerHTML = str
-      // tooltipId = window.setTimeout(hideToolltip, 2000);
+      tooltipId = window.setTimeout(hideToolltip, 2000);
     }
   }
 }

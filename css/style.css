@@ -225,7 +225,7 @@ body {
   padding: -0;
 }
 #menu_tooltip.hidden:before {
-  display: none !important
+  opacity: 0
 }
 #menu_tooltip.tooltip {
   opacity: 1;
@@ -239,6 +239,7 @@ body {
   display: block;
   height: 0px;
   left: -6px;
+  opacity: 1;
   position: absolute;
   top: 8px;
   width: 0;

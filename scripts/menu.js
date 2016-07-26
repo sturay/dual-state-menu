@@ -3,8 +3,9 @@ var nav = document.getElementById('toggleBtn'); // <nav class="nav">
 // initial heights
 var initialHeights = document.getElementsByClassName("level-1")
 var values = []
-for(var i = 0; initialHeights.length > i; i++){
+this.tooltipId = undefined
 
+for(var i = 0; initialHeights.length > i; i++){
   values.push(initialHeights[i].clientHeight)
 }
 
@@ -25,16 +26,16 @@ var toggleNav = function () {
   // 'this' is the target element that the click event was bound to.
 
   // get the height of all of the inner UL elements within the parent element
+  var temp = document.getElementById('flyout')
+
   for(var i = 0; mainSubMenus.length > i; i++){
     if(this.classList.contains("expanded")) {
       toZero()
     }
     else if(this.classList.contains("collapsed")) {
-      var temp = document.getElementById('flyout')
       if(temp.classList.contains('active')){
         temp.classList.remove('active')
-        clearTimeout(enterCountdown)
-        clearTimeout(countdown)
+         tooltipId = window.setTimeout(countdown, 250);
       }
       // make sure all uf the child lists are collapsed
       for(var i = 0; initialHeights.length > i; i++){
@@ -64,14 +65,11 @@ nav.addEventListener('click', toggleNav, false);
 // Accordion action bound to the main section element name 'menu-label.list'
 var control = document.getElementById('navigation')
 
-var timeOutId;
-
 function hideToolltip(){
   document.getElementById('menu_tooltip').classList.remove('tooltip')
   document.getElementById('menu_tooltip').classList.add('hidden')
   document.getElementById('menu_tooltip').innerHTML = ''
 }
-this.tooltipId = undefined
 
 var menu_tooltip = function(event, str) {
   window.clearTimeout(tooltipId);
@@ -97,13 +95,19 @@ var menu_tooltip = function(event, str) {
 
 
 var accordion = function(name, event) {
+
   
   var clickedSections = document.querySelectorAll('span.menu-label.list')
   for(var i=0; i < clickedSections.length; i++){
+    if(event.path[1].classList.contains('active')) {
+      clickedSections[i].classList.remove('active')
+      document.getElementById('flyout').classList.remove('active')
+      return
+    }
     clickedSections[i].classList.remove('active')
   }
   var thisSection = event.path[1].classList.add('active')
-
+  // tooltipId = window.setTimeout(hideToolltip, 0);
   document.getElementById('menu_tooltip').classList.remove('tooltip')
   document.getElementById('menu_tooltip').classList.add('hidden')
 
@@ -142,50 +146,46 @@ var accordion = function(name, event) {
   }
   // fly-out menus for when the menu is collapsed
   else {
-    var temp = document.getElementById('flyout')
-    var clickedElement = event.path[1].children[1].cloneNode(true)
-    var nextElement = document.getElementById(name).cloneNode(true)
-    nextElement.id = '_'+name // alter the id to avoid clashes
-    temp.classList.add('active')
-    temp.innerHTML = ''
-    temp.appendChild(clickedElement)
-    temp.appendChild(nextElement)
+    var temp = document.getElementById('flyout') || ''
+    if(event.path[0].classList.contains('active') && temp.classList.contains('active')){
+      console.log('line 103')
+      tooltipId = window.setTimeout(countdown, 25);
+      temp.innerHTML = ''
+      clickedSections[i].classList.remove('active')
+      temp.classList.remove('active')
+      return
+    }
+    else{
+      window.clearTimeout(tooltipId);
+      var clickedElement = event.path[1].children[1].cloneNode(true)
+      var nextElement = document.getElementById(name).cloneNode(true)
+      nextElement.id = '_'+name // alter the id to avoid clashes
+      temp.classList.add('active')
+      temp.innerHTML = ''
+      temp.appendChild(clickedElement)
+      temp.appendChild(nextElement)
+      tooltipId = window.setTimeout(countdown, 3000);
+    }
   }
 }
   
-var enterCountdown = function(){
-  // console.log('enterCountdown entered')
-  setTimeout(function() {
-    document.getElementById('flyout').classList.remove('active')
-    return true
-  }, 3000);
-}
 var countdown = function(){
-  console.log('countdown entered')
-  setTimeout(function() {
-    document.getElementById('flyout').classList.remove('active')
-    return true
-  }, 500);
+  document.getElementById('flyout').classList.remove('active')
+  document.getElementById('flyout').innerHTML = ''
+  if(document.querySelectorAll('span.menu-label.list').classList.contains('active'))
+    document.querySelectorAll('span.menu-label.list').classList.remove('active')
+  return true
 }
 
 function hideflyout(event){
   var x = event.clientX;
   var y = event.clientY;
-  var temp = document.getElementById('flyout')
-  console.log('x : temp.clientWidth', x, ' : ' , temp.clientWidth)
   if(x > 36) {
-    if(enterCountdown()) {
-      temp.innerHTML = ''
-      clearTimeout(enterCountdown)
-    }
+    tooltipId = window.setTimeout(countdown, 3000);
   }
-  if(x > temp.clientWidth) {
-    if(countdown()) {
-      temp.innerHTML = ''
-      clearTimeout(countdown)
-    }
+  if(x > document.getElementById('flyout').clientWidth) {
+    window.clearTimeout(tooltipId);
   }
   else{
-    console.log('false')
   }
 }

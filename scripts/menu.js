@@ -64,6 +64,37 @@ nav.addEventListener('click', toggleNav, false);
 // Accordion action bound to the main section element name 'menu-label.list'
 var control = document.getElementById('navigation')
 
+var timeOutId;
+
+function hideToolltip(){
+  document.getElementById('menu_tooltip').classList.remove('tooltip')
+  document.getElementById('menu_tooltip').classList.add('hidden')
+  document.getElementById('menu_tooltip').innerHTML = ''
+}
+this.tooltipId = undefined
+
+var menu_tooltip = function(event, str) {
+  window.clearTimeout(tooltipId);
+  var element = event.path[0]
+  if(document.getElementById('navigation').classList.contains('collapsed')) {
+    // show tooltip
+    if(!document.getElementById('flyout').classList.contains('active')){
+      var useThis = document.getElementById('menu_tooltip')
+      useThis.style.top = '-100px'
+      var elem = element.getBoundingClientRect()
+      var elemTop = elem.top
+      var elemHeight = elem.height / 2
+      var elemWidth = elem.width
+      useThis.classList.remove('hidden')
+      useThis.classList.add('tooltip')
+      useThis.innerHTML = ''
+      useThis.style.top = elemTop + 6 + 'px'
+      useThis.innerHTML = str
+      // tooltipId = window.setTimeout(hideToolltip, 2000);
+    }
+  }
+}
+
 
 var accordion = function(name, event) {
   
@@ -72,6 +103,9 @@ var accordion = function(name, event) {
     clickedSections[i].classList.remove('active')
   }
   var thisSection = event.path[1].classList.add('active')
+
+  document.getElementById('menu_tooltip').classList.remove('tooltip')
+  document.getElementById('menu_tooltip').classList.add('hidden')
 
   // Main accordion functionality - only available when expanded
   if(document.getElementById('navigation').classList.contains('expanded')){ // key element for differentiating between states
@@ -104,6 +138,7 @@ var accordion = function(name, event) {
       menuToUse.classList.remove('expanded')
       menuToUse.classList.add('collapsed')
     }
+
   }
   // fly-out menus for when the menu is collapsed
   else {
@@ -111,8 +146,6 @@ var accordion = function(name, event) {
     var clickedElement = event.path[1].children[1].cloneNode(true)
     var nextElement = document.getElementById(name).cloneNode(true)
     nextElement.id = '_'+name // alter the id to avoid clashes
-    console.log('clickedElement', clickedElement)
-    console.log('nextElement', nextElement)
     temp.classList.add('active')
     temp.innerHTML = ''
     temp.appendChild(clickedElement)
@@ -155,7 +188,4 @@ function hideflyout(event){
   else{
     console.log('false')
   }
-  
-
 }
-

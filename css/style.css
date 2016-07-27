@@ -11,7 +11,7 @@ body {
   width: calc(100vw - 36px);
 }
 #navigation {
-  background: rgba(0,0,65,1);
+  background: rgba(6,6,6,1);
   display: block;
   height: calc(100vh - 40px);
   overflow: hidden;
@@ -44,6 +44,29 @@ body {
 }
 
 /* EXPANDED */
+#navigation .businessIntelligence .svg  {  fill: rgba(255, 71, 123, .6); }
+#navigation .dataManagement .svg        {  fill: rgba(198, 255, 92, .6); }
+#navigation .estateManagement .svg      {  fill: rgba(100, 255, 92, .6); }
+#navigation .entitlement .svg           {  fill: rgba(46, 203, 255, .6); }
+#navigation .reconcilliation .svg       {  fill: rgba(220, 31, 255, .6); }
+#navigation .configuration .svg         {  fill: rgba(0, 128, 255, .6);  }
+#navigation .administration .svg        {  fill: rgba(255, 169, 56, .6); }
+#navigation .customItems .svg           {  fill: rgba(196, 214, 0, .6);  }
+#navigation .tools .svg                 {  fill: rgba(51, 153, 255, .6); }
+#navigation .support .svg               {  fill: rgba(26, 224, 0, .6);   }
+#navigation .businessIntelligence .svg:hover  {  fill: rgba(255, 71, 123, 1); }
+#navigation .dataManagement .svg:hover        {  fill: rgba(198, 255, 92, 1); }
+#navigation .estateManagement .svg:hover      {  fill: rgba(100, 255, 92, 1); }
+#navigation .entitlement .svg:hover           {  fill: rgba(46, 203, 255, 1); }
+#navigation .reconcilliation .svg:hover       {  fill: rgba(220, 31, 255, 1); }
+#navigation .configuration .svg:hover         {  fill: rgba(0, 128, 255, 1);  }
+#navigation .administration .svg:hover        {  fill: rgba(255, 169, 56, 1); }
+#navigation .customItems .svg:hover           {  fill: rgba(196, 214, 0, 1);  }
+#navigation .tools .svg:hover                 {  fill: rgba(51, 153, 255, 1); }
+#navigation .support .svg:hover               {  fill: rgba(26, 224, 0, 1);   }
+
+#navigation svg {transition: fill .2s ease;}
+
 #navigation.expanded {
   box-shadow: 4px 0px 5px 0px rgba(0,0,0,0.3);
   transition: all .2s ease;
@@ -64,16 +87,14 @@ body {
   border-top: 1px solid rgba(255,255,255,0);
 }
 #navigation .menu-label * {
-  background: rgba(0,0,65,1);
-  fill: rgba(255,255,255,0.6);
+  background: rgba(6,6,6,1);
   transition: all .2s ease;
   color: rgba(255,255,255,.6);
 }
 #navigation .menu-label:hover *, #navigation .menu-label.activeOut > * {
-  background: rgba(0,0,125,1);
+  background: rgba(31,31,31,1);
   color: rgba(255,255,255,1);
   transition: all .1s ease;
-  fill: rgba(255,255,255,1);
 }
 #navigation .menu-label svg {
   box-sizing: content-box;
@@ -105,7 +126,7 @@ body {
   transition: all .2s ease;
 }
 #navigation li a {
-  background: rgba(0,0,125,0);
+  background: rgba(0,0,0,0);
   color: rgba(255,255,255,.8);
   display: block;
   padding: 4pt 0 4px 4px;
@@ -113,19 +134,18 @@ body {
   transition: all .2s ease;
 }
 #navigation li a:hover {
-  background: rgba(20,0,125,1);
-  color: rgba(255,255,255,1);
+  background: rgba(255,255,255,.8);
+  color: rgba(0,0,0,1);
   transition: all .2s ease;
 }
 #navigation li a.active {
-  background: rgba(0,0,125,.5);
+  background: rgba(40,40,40,.5);
   color: rgba(255,255,255,1);
 }
 
 #navigation > ul {
   margin-left: 32pt;
   width: calc(100% - 32pt);
-  transition: all .2s ease
 }
 #navigation li ul {
   margin: 4px;
@@ -153,7 +173,7 @@ body {
   transition: all .2s ease;
 }
 #flyout {
-  background: rgba(0,0,125,0);
+  background: rgba(0,0,0,0);
   box-sizing: border-box;
   display: block;
   height: calc(100vh - 40px);
@@ -175,7 +195,7 @@ body {
   transition: all .2s ease;
 }
 #flyout.active {
-  background: rgba(0,0,125,0.8);
+  background: rgba(0,0,0,0.8);
   left: 36px;
   pointer-events: all;
   transition: all .2s ease;
@@ -191,8 +211,8 @@ body {
   display: block;
 }
 #flyout a:hover {
-  background: rgba(0,0,0,0.2);
-  color: rgba(255,255,255,1);
+  background: rgba(255,255,255,1);
+  color: rgba(0,0,0,1);
   transition: all .2s ease;
 }
 #flyout b {

@@ -19,7 +19,7 @@ this.tooltipId = undefined;
 var mainSubMenus = document.getElementsByClassName("level-1");
 function toZero(){
   for(i = 0; mainSubMenus.length > i; i++){
-    mainSubMenus[i].setAttribute("style", "height:0;");
+    mainSubMenus[i].style.height = 0;
   }
 }
 toZero();
@@ -134,20 +134,20 @@ var accordion = function(event, name) {
       if(menuToUse.getAttribute('style') !== "height:0px;"){
         indexOfMenu = menuToUse.getAttribute('dataIndex');
         if (menuToUse.classList.contains('collapsed')){
-          menuToUse.setAttribute("style", "height: calc("+ values[indexOfMenu] +"px + 15px);");
+          menuToUse.style.height = "calc( " + values[indexOfMenu] + "px + 15px)";
           menuToUse.classList.remove('collapsed');
           menuToUse.classList.add('expanded');
         }
       }
       else {
         indexOfMenu = menuToUse.getAttribute('dataIndex');
-        menuToUse.setAttribute("style", "height: calc("+ values[indexOfMenu] +"px + 15px);");
+        menuToUse.style.height = "calc( " + values[indexOfMenu] + "px + 15px)";
         menuToUse.classList.remove('collapsed');
         menuToUse.classList.add('expanded');
       }
     }
     else {
-      menuToUse.setAttribute("style", "height:0px;");
+      menuToUse.style.height = "0";
       menuToUse.classList.remove('expanded');
       menuToUse.classList.add('collapsed');
     }

@@ -1,5 +1,6 @@
 // Specify the target button to collapse/expand the main navigation
 var nav = document.getElementById('toggleBtn'); // <nav class="nav">
+var menuIconAction = document.querySelectorAll('.menu-label')
 // initial heights
 var initialHeights = document.getElementsByClassName("level-1");
 var values = [];
@@ -18,7 +19,7 @@ function toZero(){
 toZero();
 
 var toggleNav = function () {
-  
+  tooltipId = window.setTimeout(hideToolltip, 1);
   var sections = document.querySelectorAll('span.menu-label.list');
   for(var i=0; i < sections.length; i++){
     sections[i].classList.remove('active');
@@ -73,7 +74,9 @@ function hideToolltip(){
 
 var menu_tooltip = function(event, str) {
   window.clearTimeout(tooltipId);
-  var element = event.path[0];
+  navItems = event.currentTarget.lastChild;
+  str = navItems.innerHTML;
+  var element = event.currentTarget;
   if(document.getElementById('navigation').classList.contains('collapsed')) {
     // show tooltip
     if(!document.getElementById('flyout').classList.contains('active')){
@@ -93,19 +96,22 @@ var menu_tooltip = function(event, str) {
   }
 };
 
-var accordion = function(name, event) {
+var accordion = function(event, name) {
+
+  name = event.currentTarget.nextElementSibling.id;
+  console.log(name)
   
   var clickedSections = document.querySelectorAll('span.menu-label.list');
   for(i=0; i < clickedSections.length; i++){
-    if(event.path[1].classList.contains('active') && document.getElementById('flyout').classList.contains('active')) {
-      event.path[1].classList.remove('active');
+    if(event.currentTarget.classList.contains('active') && document.getElementById('flyout').classList.contains('active')) {
+      event.currentTarget.classList.remove('active');
       document.getElementById('flyout').classList.remove('active');
       return;
     }
     clickedSections[i].classList.remove('active');
   }
-  var thisSection = event.path[1].classList.add('active');
-  // tooltipId = window.setTimeout(hideToolltip, 0);
+  var thisSection = event.currentTarget.classList.add('active');
+
   document.getElementById('menu_tooltip').classList.remove('tooltip');
   document.getElementById('menu_tooltip').classList.add('hidden');
 
@@ -145,32 +151,34 @@ var accordion = function(name, event) {
   // fly-out menus for when the menu is collapsed
   else {
     var temp = document.getElementById('flyout') || '';
-    if(event.path[0].classList.contains('active') && temp.classList.contains('active')){
+
+    if(event.currentTarget.classList.contains('active') && temp.classList.contains('active')){
+      console.log('foo')
       tooltipId = window.setTimeout(countdown, 25);
       temp.innerHTML = '';
-      event.path[0].classList.remove('active');
+      event.currentTarget.classList.remove('active');
       temp.classList.remove('active');
       return;
     }
     else{
       window.clearTimeout(tooltipId);
-      var clickedElement = event.path[1].children[1].cloneNode(true);
+      var clickedElement = event.currentTarget.children[1].cloneNode(true);
       var nextElement = document.getElementById(name).cloneNode(true);
       nextElement.id = '_'+name; // alter the id to avoid clashes
       temp.classList.add('active');
       temp.innerHTML = '';
       temp.appendChild(clickedElement);
       temp.appendChild(nextElement);
-      tooltipId = window.setTimeout(countdown, 3000);
     }
   }
 };
   
 var countdown = function(){
+  if(document.querySelectorAll('span.menu-label').classList){
+    document.querySelectorAll('span.menu-label').classList.remove('active');
+  }
   document.getElementById('flyout').classList.remove('active');
   document.getElementById('flyout').innerHTML = '';
-  if(document.querySelectorAll('span.menu-label.list').classList.contains('active'))
-    document.querySelectorAll('span.menu-label.list').classList.remove('active');
   return true;
 };
 
@@ -185,4 +193,9 @@ function hideflyout(event){
   }
   else{
   }
+}
+
+for(i=0;i < menuIconAction.length;i++){
+  menuIconAction[i].addEventListener('mouseover', menu_tooltip, false);
+  menuIconAction[i].addEventListener('click', accordion, true);
 }

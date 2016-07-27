@@ -69,7 +69,7 @@ body {
   transition: all .2s ease;
   color: rgba(255,255,255,.6);
 }
-#navigation .menu-label:hover *, #navigation .menu-label.active > * {
+#navigation .menu-label:hover *, #navigation .menu-label.activeOut > * {
   background: rgba(0,0,125,1);
   color: rgba(255,255,255,1);
   transition: all .1s ease;
@@ -125,6 +125,7 @@ body {
 #navigation > ul {
   margin-left: 32pt;
   width: calc(100% - 32pt);
+  transition: all .2s ease
 }
 #navigation li ul {
   margin: 4px;

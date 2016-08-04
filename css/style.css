@@ -11,7 +11,7 @@ body {
   width: calc(100vw - 36px);
 }
 #navigation {
-  background: rgba(6,6,6,1);
+  background: #003d6e;
   display: block;
   height: calc(100vh - 40px);
   overflow: hidden;
@@ -44,26 +44,15 @@ body {
 }
 
 /* EXPANDED */
-#navigation .businessIntelligence .svg  {  fill: rgba(255, 71, 123, .6); }
-#navigation .dataManagement .svg        {  fill: rgba(198, 255, 92, .6); }
-#navigation .estateManagement .svg      {  fill: rgba(100, 255, 92, .6); }
-#navigation .entitlement .svg           {  fill: rgba(46, 203, 255, .6); }
-#navigation .reconcilliation .svg       {  fill: rgba(220, 31, 255, .6); }
-#navigation .configuration .svg         {  fill: rgba(0, 128, 255, .6);  }
-#navigation .administration .svg        {  fill: rgba(255, 169, 56, .6); }
-#navigation .customItems .svg           {  fill: rgba(196, 214, 0, .6);  }
-#navigation .tools .svg                 {  fill: rgba(51, 153, 255, .6); }
-#navigation .support .svg               {  fill: rgba(26, 224, 0, .6);   }
-#navigation .businessIntelligence .svg:hover  {  fill: rgba(255, 71, 123, 1); }
-#navigation .dataManagement .svg:hover        {  fill: rgba(198, 255, 92, 1); }
-#navigation .estateManagement .svg:hover      {  fill: rgba(100, 255, 92, 1); }
-#navigation .entitlement .svg:hover           {  fill: rgba(46, 203, 255, 1); }
-#navigation .reconcilliation .svg:hover       {  fill: rgba(220, 31, 255, 1); }
-#navigation .configuration .svg:hover         {  fill: rgba(0, 128, 255, 1);  }
-#navigation .administration .svg:hover        {  fill: rgba(255, 169, 56, 1); }
-#navigation .customItems .svg:hover           {  fill: rgba(196, 214, 0, 1);  }
-#navigation .tools .svg:hover                 {  fill: rgba(51, 153, 255, 1); }
-#navigation .support .svg:hover               {  fill: rgba(26, 224, 0, 1);   }
+#navigation .menu-label svg path.frame {
+  fill: rgba(255,255,255,0)
+}
+#navigation .menu-label:hover svg path.frame {
+  fill: rgba(0,26,49,1)
+}
+#navigation.expanded .menu-label:hover svg path.frame {
+  fill: rgba(255,255,255,0)
+}
 
 #navigation svg {transition: fill .2s ease;}
 
@@ -87,21 +76,19 @@ body {
   border-top: 1px solid rgba(255,255,255,0);
 }
 #navigation .menu-label * {
-  background: rgba(6,6,6,1);
   transition: all .2s ease;
   color: rgba(255,255,255,.6);
 }
 #navigation .menu-label:hover *, #navigation .menu-label.activeOut > * {
-  background: rgba(31,31,31,1);
   color: rgba(255,255,255,1);
   transition: all .1s ease;
 }
 #navigation .menu-label svg {
   box-sizing: content-box;
-  height: 24px;
-  padding: 7px 6px 8px;
+  height: 29px;
+  padding: 7px 4px 8px;
   position:relative;
-  width: 24px;
+  width: 29px;
 }
 #navigation .menu-label svg g {
   pointer-events: none;
@@ -142,7 +129,29 @@ body {
   background: rgba(40,40,40,.5);
   color: rgba(255,255,255,1);
 }
-
+#navigation li.sub,
+#flyout li.sub {
+  padding: 4pt;
+  margin-top: 2pt;
+  background: rgba(255,255,255,.1);
+  border-radius: 3pt 0 0 3pt;
+  color: rgba(255,255,255,1);
+  font-weight: 700;
+  position: relative;
+}
+#navigation li.sub:after,
+#flyout li.sub:after {
+  display: block;
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 0;
+  border: 6px solid rgba(255,255,255,0);
+  border-bottom: solid 0px rgba(0,0,0,0);
+  border-top-color: rgba(255,255,255,1);
+  right: 10px;
+  top: 9px;
+}
 #navigation > ul {
   margin-left: 32pt;
   width: calc(100% - 32pt);
@@ -268,3 +277,4 @@ body {
   top: 8px;
   width: 0;
 }
+

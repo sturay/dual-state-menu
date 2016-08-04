@@ -1,0 +1,17 @@
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 240 240" style="enable-background:new 0 0 240 240;" xml:space="preserve">
+
+<g class="frame">
+	<path d="M220,240H20c-11,0-20-9-20-20V20C0,9,9,0,20,0h200c11,0,20,9,20,20v200C240,231,231,240,220,240z"/>
+</g>
+	<g id="custom_items">
+		<polyline style="display:inline;fill:#2D90D0;" points="220,47.5 20,47.5 20,222 220,222 220,47.5 		"/>
+		<path style="display:inline;fill:#046FBD;" d="M189.2,28.7l-4.3,4.3l27.2,27.2l4.3-4.3c7.5-7.6,7.5-19.7,0-27.2l0,0C208.8,21.2,196.7,21.2,189.2,28.7z"/>
+		<polygon style="display:inline;fill:#DAE2F9;" points="203.4,205.3 36.6,205.3 36.6,64.2 		"/>
+		<polygon style="display:inline;fill:#BCDE24;" points="203.2,51.1 92.6,161.8 74.4,143.6 185,32.8 		"/>
+		<polygon style="display:inline;fill:#A5BC20;" points="212,59.8 101.3,170.5 91.5,160.6 202.1,49.9 		"/>
+		<polygon style="display:inline;fill:#FFE75B;" points="75,143.2 58.5,186.8 102,170.3 		"/>
+		<path style="display:inline;fill:#000000;" d="M212.2,60.1L185,32.8L74.4,143.6l0.3,0.3l-16.2,42.9l42.9-16.2l0.3,0.3L212.2,60.1z M74.4,177.5l-6.7-6.7
+			l8.4-22.2l20.5,20.6L74.4,177.5z M185,37l22.9,23L101.6,166.6l-22.9-23L185,37z"/>
+	</g>
+</svg>

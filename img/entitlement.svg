@@ -1,0 +1,32 @@
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 240 240" style="enable-background:new 0 0 240 240;" xml:space="preserve">
+
+<g class="frame">
+	<path d="M220,240H20c-11,0-20-9-20-20V20C0,9,9,0,20,0h200c11,0,20,9,20,20v200C240,231,231,240,220,240z"/>
+</g>
+	<g id="entitlement">
+		<g style="display:inline;">
+			<polygon style="fill:#9ADAFF;" points="130.7,20 53.3,20 53.3,220 186.7,220 186.7,76 			"/>
+		</g>
+		<g style="display:inline;">
+			<path style="fill:#0B70B7;" d="M82.5,178.5h75c4.6,0,8.3,3.7,8.3,8.3v0.1c0,4.6-3.7,8.3-8.3,8.3h-75c-4.6,0-8.3-3.7-8.3-8.3v-0.1
+				C74.2,182.3,77.9,178.5,82.5,178.5z"/>
+		</g>
+		<g style="display:inline;">
+			<path style="fill:#0B70B7;" d="M82.5,144.9h75c4.6,0,8.3,3.7,8.3,8.3v0.1c0,4.6-3.7,8.3-8.3,8.3h-75c-4.6,0-8.3-3.7-8.3-8.3v-0.1
+				C74.2,148.7,77.9,144.9,82.5,144.9z"/>
+		</g>
+		<g style="display:inline;">
+			<path style="fill:#0B70B7;" d="M82.5,111.3h75c4.6,0,8.3,3.7,8.3,8.3v0.1c0,4.6-3.7,8.3-8.3,8.3h-75c-4.6,0-8.3-3.7-8.3-8.3v-0.1
+				C74.2,115.1,77.9,111.3,82.5,111.3z"/>
+		</g>
+		<g style="display:inline;">
+			<path style="fill:#0B70B7;" d="M82.5,78h75c4.6,0,8.3,3.7,8.3,8.3v0.1c0,4.6-3.7,8.3-8.3,8.3h-75c-4.6,0-8.3-3.7-8.3-8.3v-0.1
+				C74.2,81.7,77.9,78,82.5,78z"/>
+		</g>
+		<g style="display:inline;">
+			<path style="fill:#DCF1FF;" d="M137.2,25c2.3,2.6,3.6,5.9,3.6,9.6v6.3v16.7c0,4.6,3.7,8.3,8.3,8.3h16.7h6.3c3.7,0,7,1.4,9.6,3.6L137.2,25z
+				"/>
+		</g>
+	</g>
+</svg>

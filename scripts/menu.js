@@ -1,14 +1,85 @@
 // Specify the target button to collapse/expand the main navigation
 var nav = document.getElementById('toggleBtn'); // <nav class="nav">
-
+var i;
 // specify the main targets for actions both collapsed and expanded
 var menuIconAction = document.querySelectorAll('.menu-label');
 
-// initial heights for the accordion
-var initialHeights = document.getElementsByClassName("level-1");
-var values = [];
-for(var i = 0; initialHeights.length > i; i++){
-  values.push(initialHeights[i].offsetHeight);
+var resetSubMenuHeights = function(){
+  var subs = document.getElementsByClassName("level-2");
+  for(i=0; i < subs.length; i++){
+    subs[i].style.height = 0;
+  }
+}
+
+// sub accordion for embedded elements
+var subAccordion = function(event) {
+  var classes = document.getElementsByClassName("level-2");
+  var parentHeight = event.path[1].clientHeight;
+  var thisOriginalHeight = secondLevelHeightValues[event.path[0].id];
+  var subMenuToUse = event.path[0].firstElementChild
+  var indexOfParent, thisClickedHeight;
+
+  if(document.querySelector('.level-2.expanded'))
+    thisClickedHeight = document.querySelector('.level-2.expanded').clientHeight
+  else
+    thisClickedHeight = 0;
+  var reduceByNumber = thisClickedHeight - subMenuToUse.clientHeight
+  
+  if (event.path[0].firstElementChild.classList.contains('collapsed')){
+    for(i=0; i < classes.length; i++){
+      event.path[1].style.height = parentHeight - thisClickedHeight + 'px';
+      classes[i].style.height = 0;
+      classes[i].classList.remove('expanded');
+      classes[i].classList.add('collapsed');
+    }
+    if(subMenuToUse.clientHeight === 0){
+      indexOfParent = event.path[1].getAttribute('dataIndex');
+      if (subMenuToUse.classList.contains('collapsed')){
+        subMenuToUse.style.height = secondLevelHeightValues[event.path[0].id] + "px";
+        event.path[1].style.height = thisOriginalHeight + firstLevelHeightValues[indexOfParent] + 14 + 'px';
+        subMenuToUse.classList.remove('collapsed');
+        subMenuToUse.classList.add('expanded');
+      }
+    }
+    else {
+      indexOfParent = event.path[1].getAttribute('dataIndex');
+      subMenuToUse.style.height = secondLevelHeightValues[event.path[0].id] + "px";
+      event.path[1].style.height = thisOriginalHeight + firstLevelHeightValues[indexOfParent] + 14 +'px';
+      subMenuToUse.classList.remove('collapsed');
+      subMenuToUse.classList.add('expanded');
+    }
+  }
+  else {
+    console.log('thisClickedHeight',thisClickedHeight,'reduceByNumber',reduceByNumber, 'subMenuToUse.clientHeight', subMenuToUse.clientHeight)
+    event.path[1].style.height = parentHeight - thisClickedHeight + 'px';
+    subMenuToUse.style.height = 0;
+    subMenuToUse.classList.remove('expanded');
+    subMenuToUse.classList.add('collapsed');
+  }
+
+  var foo = document.querySelector('.level-2.expanded').clientHeight
+
+}
+
+// initial heights for the sub menus
+// these need to be called first so as to not distort the height of the accordions on entry
+var secondLevelHeights = document.querySelectorAll("li.sub");
+var secondLevelHeightValues = {};
+for(i = 0; secondLevelHeights.length > i; i++){
+  // create the values for calling whenever
+  var id = secondLevelHeights[i].parentElement.id + '_' + i
+  secondLevelHeightValues[id] = secondLevelHeights[i].firstElementChild.offsetHeight;
+  // add some identifiers for clicks
+  secondLevelHeights[i].firstElementChild.style.height = 0;
+  secondLevelHeights[i].id = secondLevelHeights[i].parentElement.id + '_' + i
+  secondLevelHeights[i].addEventListener('click', subAccordion, true);
+}
+
+// initial heights for the accordion now that the subs are zeroed.
+var firstLevelHeights = document.getElementsByClassName("level-1");
+var firstLevelHeightValues = [];
+for(i = 0; firstLevelHeights.length > i; i++){
+  firstLevelHeightValues.push(firstLevelHeights[i].offsetHeight);
 }
 
 // assign an ID to timeouts
@@ -25,6 +96,7 @@ function toZero(){
 toZero();
 
 var toggleNav = function () {
+  resetSubMenuHeights()
   tooltipId = window.setTimeout(hideToolltip, 1);
   var sections = document.querySelectorAll('span.menu-label.list');
   for(var i=0; i < sections.length; i++){
@@ -45,9 +117,9 @@ var toggleNav = function () {
          tooltipId = window.setTimeout(countdown, 250);
       }
       // make sure all uf the child lists are collapsed
-      for(i = 0; initialHeights.length > i; i++){
-        initialHeights[i].classList.remove('expanded');
-        initialHeights[i].classList.add('collapsed');
+      for(i = 0; firstLevelHeights.length > i; i++){
+        firstLevelHeights[i].classList.remove('expanded');
+        firstLevelHeights[i].classList.add('collapsed');
       }
       toZero();
     }
@@ -103,7 +175,7 @@ var menu_tooltip = function(event, str) {
 };
 
 var accordion = function(event, name) {
-
+  resetSubMenuHeights();
   name = event.currentTarget.nextElementSibling.id;
   
   var clickedSections = document.querySelectorAll('span.menu-label.list');
@@ -134,14 +206,14 @@ var accordion = function(event, name) {
       if(menuToUse.getAttribute('style') !== "height:0px;"){
         indexOfMenu = menuToUse.getAttribute('dataIndex');
         if (menuToUse.classList.contains('collapsed')){
-          menuToUse.style.height = "calc( " + values[indexOfMenu] + "px + 15px)";
+          menuToUse.style.height = firstLevelHeightValues[indexOfMenu] + 15 + "px";
           menuToUse.classList.remove('collapsed');
           menuToUse.classList.add('expanded');
         }
       }
       else {
         indexOfMenu = menuToUse.getAttribute('dataIndex');
-        menuToUse.style.height = "calc( " + values[indexOfMenu] + "px + 15px)";
+        menuToUse.style.height = "calc( " + firstLevelHeightValues[indexOfMenu] + "px + 15px)";
         menuToUse.classList.remove('collapsed');
         menuToUse.classList.add('expanded');
       }
@@ -176,7 +248,8 @@ var accordion = function(event, name) {
     }
   }
 };
-  
+
+// countdown for timeouts
 var countdown = function(){
   if(document.querySelectorAll('span.menu-label').classList){
     document.querySelectorAll('span.menu-label').classList.remove('activeOut');
@@ -186,6 +259,7 @@ var countdown = function(){
   return true;
 };
 
+// hiding the flyout when not needed
 function hideflyout(event){
   var x = event.clientX;
   var y = event.clientY;

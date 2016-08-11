@@ -54,7 +54,7 @@ body {
   fill: rgba(255,255,255,0)
 }
 
-#navigation svg {transition: fill .2s ease;}
+#navigation svg {transition: fill .2s ease;display: block}
 
 #navigation.expanded {
   box-shadow: 4px 0px 5px 0px rgba(0,0,0,0.3);
@@ -131,12 +131,14 @@ body {
 }
 #navigation li.sub,
 #flyout li.sub {
-  padding: 4pt;
-  margin-top: 2pt;
   background: rgba(255,255,255,.1);
   border-radius: 3pt 0 0 3pt;
   color: rgba(255,255,255,1);
+  cursor:pointer;
   font-weight: 700;
+  overflow: hidden;
+  margin-top: 2pt;
+  padding: 6pt 4pt 1pt 4pt;
   position: relative;
 }
 #navigation li.sub:after,
@@ -150,7 +152,14 @@ body {
   border-bottom: solid 0px rgba(0,0,0,0);
   border-top-color: rgba(255,255,255,1);
   right: 10px;
-  top: 9px;
+  top: 14px;
+  transform: translateY(0px);
+  transition: all .1s ease
+}
+#navigation li.sub:hover:after,
+#flyout li.sub:hover:after {
+  transform: translateY(4px);
+  transition: all .1s ease
 }
 #navigation > ul {
   margin-left: 32pt;
@@ -210,6 +219,9 @@ body {
   transition: all .2s ease;
   width: 324px;
   z-index: 2;
+}
+#flyout .level-2 {
+  margin-top: 6pt;
 }
 #flyout a {
   background: rgba(0,0,0,0);

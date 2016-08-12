@@ -273,6 +273,8 @@ function hideflyout(event){
   }
 }
 
+document.getElementById('flyout').addEventListener('click', subAccordion, true);
+
 for(i=0;i < menuIconAction.length;i++){
   menuIconAction[i].addEventListener('mouseover', menu_tooltip, false);
   menuIconAction[i].addEventListener('click', accordion, true);

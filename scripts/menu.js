@@ -57,8 +57,6 @@ var subAccordion = function(event) {
     subMenuToUse.classList.add('collapsed');
   }
 
-  var foo = document.querySelector('.level-2.expanded').clientHeight
-
 }
 
 // initial heights for the sub menus

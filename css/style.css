@@ -190,6 +190,8 @@ body {
 #navigation.collapsed > ul > li {
   transition: all .2s ease;
 }
+
+/* Flyout specific */
 #flyout {
   background: rgba(0,0,0,0);
   box-sizing: border-box;
@@ -245,12 +247,78 @@ body {
   margin-bottom: 6pt;
 }
 
-#container {
-  position:relative;
-  width:calc(100vw - 48px);
-  margin-left:48px;
-  z-index: 1;
+/* Menu options */
+#menu_options {
+  display:block;
+  overflow:hidden;
 }
+.collapsed #menu_options {
+  left:-320px;
+  opacity:0;
+  position:absolute;
+  transition: all .2s ease;
+}
+.expanded #menu_options {
+  left:0;
+  opacity:1;
+  position:relative;
+  transition: all .2s ease;
+}
+#menu_options .options {
+  list-style: none;
+}
+#menu_options .options li {
+  background: rgba(0,0,0,.4);
+  border: 1px solid rgba(255,255,255,.3);
+  border-top: none;
+  box-sizing: border-box;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 10pt;
+  font-weight: 700;
+  margin: 0 -2px;
+  padding: 3px 0;
+  position: relative;
+  transition: all .2s ease;
+  width: calc(15% + 2px);
+}
+#menu_options .options li:last-of-type {
+  color: rgba(255,255,255,.8);
+  width: calc(55% + 2px);
+  padding: 4pt 8pt;
+  top: -10px;
+  border: none;
+  background: rgba(0,0,0,0);
+  cursor: default;
+}
+#menu_options .options .option.selected {
+  background: rgba(0,0,0,0);
+  border:none;
+  cursor: default;
+  transition: all .2s ease;
+}
+#menu_options .options .option.selected svg {
+  fill: rgba(255,255,255,1);
+}
+#menu_options .options .option svg {
+  fill:rgba(255,255,255,.7);
+  height:18px;
+  margin: 3px auto;
+  pointer-events: none;
+  position: relative;
+  transition: all .2s ease;
+  width:18px;
+}
+#menu_options .options .option:hover {
+  background: rgba(0,0,0,.1);
+  transition: all .2s ease;
+}
+#menu_options .options .option:hover svg {
+  fill: rgba(255,255,255,1);
+  transition: all .2s ease;
+}
+
+/* Tooltip */
 #menu_tooltip {
   background: rgba(0,0,0,.9);
   border-radius: 2pt;
@@ -290,3 +358,28 @@ body {
   width: 0;
 }
 
+
+
+/* Discretionary styling for the temporary body content */
+#container {
+  position:relative;
+  width:calc(100vw - 48px);
+  margin-left:48px;
+  z-index: 1;
+}
+/* hide-show different menus */
+#navigation .workingMenu {
+  width: 0;
+  overflow:hidden;
+  opacity:0;
+  position: absolute;
+  transition: all .2s ease;
+}
+#navigation .workingMenu.expanded {
+  width: 360px;
+  opacity:1;
+  transition: all .2s ease;
+}
+#navigation .workingMenu svg {
+  fill: #2D90D0
+}

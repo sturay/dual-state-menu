@@ -173,6 +173,7 @@ var menu_tooltip = function(event, str) {
 };
 
 var accordion = function(event, name) {
+  if(event.path[0].tagName === 'A') return;
   resetSubMenuHeights();
   name = event.currentTarget.nextElementSibling.id;
   
@@ -247,6 +248,36 @@ var accordion = function(event, name) {
   }
 };
 
+var tab = document.querySelectorAll('#menu_options .option');
+
+var menuTypeToggle = function(event){
+  // starter variables
+  var menuTitle = document.getElementById('menuTypeLabel');
+  var clickedTab = event.path[0];
+
+  // we need to define the elements that will be used as the different types of menu
+  var sections = ['Menu','History','Favorites'];
+  var workingMenu = document.querySelectorAll('#navigation .workingMenu');
+  
+  // normalising the tabs to have the same classlist
+  for(i=0;tab.length > i;i++){
+    tab[i].classList.remove('selected');
+  }
+
+  // We then loop through the menus and do the do on each.
+  for(i=0;sections.length > i; i++){
+    workingMenu[i].classList.remove('expanded');
+    if(clickedTab.id == sections[i]){
+      workingMenu[i].classList.add('expanded');
+    }
+  }
+
+  // Make the clicked one 'selected'
+  clickedTab.classList.add('selected');
+  // change the text in the menu to reflect the clicked value.
+  menuTitle.innerText = clickedTab.id;
+}
+
 // countdown for timeouts
 var countdown = function(){
   if(document.querySelectorAll('span.menu-label').classList){
@@ -277,3 +308,8 @@ for(i=0;i < menuIconAction.length;i++){
   menuIconAction[i].addEventListener('mouseover', menu_tooltip, false);
   menuIconAction[i].addEventListener('click', accordion, true);
 }
+
+for(i=0;i < tab.length;i++){
+  tab[i].addEventListener('click', menuTypeToggle, false);
+}
+

@@ -1,8 +1,6 @@
 # CC menu playground - vanilla
 
-Core Control menu updates with vanilla javascript as jQuery is good if you're doing a whole load of DOM manipulation, but awful at more focussed things due to performance and the whole sledgehammer to crack a nut analagy.
-
-The use of Angular is not possible due to conflicting libraries (it's already loaded in the SPAs within Core Control so there are toys thrown)
+As long as the HTML structure is the same, inclusion of the script and shim will make the menu spring into life.
 
 ## Structure
 
